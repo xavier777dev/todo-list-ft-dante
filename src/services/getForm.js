@@ -1,4 +1,4 @@
-export function handleSubmit(e) {
+export function handleSubmit(e, setTasks, tasks) {
   e.preventDefault();
   const inputValue = e.target.inputTask.value;
   e.target.inputTask.value = ''; 
@@ -6,7 +6,3 @@ export function handleSubmit(e) {
   setTasks(newTasks);
 }
 
-export function handleChecked (id) {
-  const newTasks = tasks.map(task => (id == task.id) ? {...task, completed: !task.completed} : task);
-  setTasks(newTasks);
-}

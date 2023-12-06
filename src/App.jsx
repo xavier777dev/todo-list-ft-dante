@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import NavBar from './components/NavBar';
-import Task from './components/Task';
-import { FormTask } from './components/formTask';
 import { handleSubmit } from './services/getForm';
+import { FormTask } from './components/formTask';
+import Task from './components/Task';
 
 function App() {
+  
   const [tasks, setTasks] = useState([]);
 
   return (
@@ -17,7 +18,15 @@ function App() {
         }}
       >
         <button className='w-[50px] h-[50px] rounded-full bg-white absolute bottom-24 right-4 text-4xl'><i className="fa-solid fa-plus"></i></button>
-        <FormTask handleSubmit={handleSubmit}/>
+        <FormTask handleSubmit={handleSubmit} tasks={tasks} setTasks={setTasks} />
+        <div className='flex flex-col gap-2 px-7 pt-7'>
+          {
+            tasks.map(task => {
+              return <Task key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+            })
+          }
+        </div>
+
       </main>
     </>
   )

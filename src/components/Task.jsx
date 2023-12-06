@@ -1,22 +1,22 @@
-import { handleChecked } from "../services/getForm";
+import { handleCompleted, handleDelete } from "../hooks/useTasks";
+import trashIcon from "../assets/trash.ico";
 
-export function ListTasks({task, handleChecked}) {
-  return (<ul className='flex flex-col gap-3 px-4 pt-4'>
-    {
-      tasks.map(task => {
-        return <Task key={task.id} task={task} />
-      })
-    } 
-  </ul>
-  )
-}
-
-const  ({task, handleChecked}) => {
+const Task = ({task, setTasks, tasks}) => {
   const {id, name, completed} = task;
   return (
-    <li key={id} className='flex justify-between px-5 py-2 bg-white rounded bg-cyan-300/75 '>
-      <span>{name}</span>
-      <input type="checkbox" onChange={() => handleChecked(id)} checked={completed} />
+    <li className='flex justify-between items-center px-5 py-2 bg-white rounded bg-cyan-300/75
+    hover:bg-[#a8d4ed] transition-all cursor-pointer'
+    >
+
+      <div className="flex items-center gap-2">
+        <input type="checkbox" onChange={() => handleCompleted(id, setTasks, tasks)} 
+          checked={completed} name={id}
+          />
+        <span className="font-semibold text-[#013C6A] ">{name}</span>
+      </div>
+      <img className="w-4 h-4 cursor-pointer hover:scale-125 transition-all" src={trashIcon} alt="icon trash" 
+        onClick={() => handleDelete(id, setTasks, tasks)} 
+      />
     </li>
   )
 }
